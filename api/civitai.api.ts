@@ -1,5 +1,6 @@
 import axios, { type AxiosRequestConfig } from "axios"
 import Constants from "expo-constants"
+import type { ImageType } from "@/types/image.type"
 
 const token = Constants.expoConfig?.extra?.CIVITAI_API_KEY
 if (!token) {
@@ -14,6 +15,11 @@ export const civitaiCore = axios.create({
   },
 })
 
+civitaiCore.interceptors.request.use((request) => {
+  console.log(request)
+  return request
+})
+
 export const fetchImages = (configs?: AxiosRequestConfig) => {
-  return civitaiCore.get("/images", configs)
+  return civitaiCore.get<{ items: ImageType[] }>("/images", configs)
 }
