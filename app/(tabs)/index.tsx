@@ -2,11 +2,12 @@ import { FlatList, Image, SafeAreaView } from "react-native"
 import { fetchMoviesList } from "@/api/movies.api"
 import { Loader } from "@/components/Loader"
 import { ThemedText } from "@/components/ThemedText"
+import { genImageUrlPoster } from "@/utils/build-image-url"
 import { useQuery } from "@tanstack/react-query"
 
 export default function HomeScreen() {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["images"],
+    queryKey: ["popular_movies"],
     queryFn: () => fetchMoviesList("popular"),
   })
 
@@ -21,7 +22,7 @@ export default function HomeScreen() {
           renderItem={({ item }) => (
             <Image
               source={{
-                uri: `https://media.themoviedb.org/t/p/w440_and_h660_face/${item.poster_path}`,
+                uri: genImageUrlPoster(item.poster_path),
               }}
               style={{ width: "50%", height: 200 }}
             />
