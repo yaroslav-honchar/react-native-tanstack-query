@@ -18,12 +18,33 @@ const TabLayout = () => {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ color }) => (
             <Icon
-              name={focused ? "home" : "home-outline"}
+              name={"home"}
               color={color}
             />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="movies/index"
+        options={{
+          title: "Movies",
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <Icon
+              name={"movie"}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="movies/[id]"
+        options={{
+          title: "Movie Details",
+          headerShown: false,
+          href: null,
         }}
       />
     </Tabs>
