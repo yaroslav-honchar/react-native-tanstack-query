@@ -18,7 +18,7 @@ export const ListMovies: React.FC<ListMoviesProps> = () => {
     <>
       {data && (
         <FlatList
-          numColumns={2}
+          numColumns={3}
           data={data.pages.flatMap((page) => page.data.results)}
           onEndReached={() => {
             if (hasNextPage) {
@@ -26,7 +26,7 @@ export const ListMovies: React.FC<ListMoviesProps> = () => {
             }
           }}
           renderItem={({ item }) => (
-            <View style={{ width: "50%", padding: 8 }}>
+            <View style={{ width: "33.33333%", padding: 8 }}>
               <CardMovie movie={item} />
             </View>
           )}

@@ -33,7 +33,6 @@ export const CardMovie: React.FC<CardMovieProps> = ({ movie }) => {
       <ThemedView style={styles.wrapper}>
         <ThemedText
           style={styles.title}
-          type={"defaultSemiBold"}
           numberOfLines={1}
           ellipsizeMode="tail"
         >
