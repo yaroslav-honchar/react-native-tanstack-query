@@ -1,6 +1,6 @@
 import React from "react"
 import { StyleSheet } from "react-native"
-import { ThemedText } from "@/components/ThemedText"
+import { ThemedText } from "@/components/ThemedText/ThemedText"
 import { ThemedView } from "@/components/ThemedView"
 
 export const Loader: React.FC = () => {
