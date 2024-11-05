@@ -34,8 +34,7 @@ export const genImageUrlBackdrop = (
   path: string,
   width: ImageTypeSize<"backdrop"> = 780,
 ): string => {
-  const height = Math.round(Number(width) / imageSizes.backdrop.aspectRatio)
-  const size = `w${String(width)}_and_h${height}_multi_faces`
+  const size = `w${String(width)}`
 
   return `https://media.themoviedb.org/t/p/${size}${path}`
 }
