@@ -1,5 +1,5 @@
 import { FlatList, Image, SafeAreaView } from "react-native"
-import { fetchImages } from "@/api/civitai.api"
+import { fetchMoviesList } from "@/api/movies.api"
 import { Loader } from "@/components/Loader"
 import { ThemedText } from "@/components/ThemedText"
 import { useQuery } from "@tanstack/react-query"
@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query"
 export default function HomeScreen() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["images"],
-    queryFn: fetchImages,
+    queryFn: () => fetchMoviesList("popular"),
   })
 
   return (
@@ -17,10 +17,12 @@ export default function HomeScreen() {
       {data && (
         <FlatList
           numColumns={2}
-          data={data.data.items}
+          data={data.data.results}
           renderItem={({ item }) => (
             <Image
-              source={{ uri: item.url }}
+              source={{
+                uri: `https://media.themoviedb.org/t/p/w440_and_h660_face/${item.poster_path}`,
+              }}
               style={{ width: "50%", height: 200 }}
             />
           )}
