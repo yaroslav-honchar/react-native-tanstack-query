@@ -19,8 +19,8 @@ export const ThemedText: React.FC<ThemedTextProps> = ({
         { color },
         type === "default" ? styles.default : undefined,
         type === "title" ? styles.title : undefined,
-        type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
         type === "subtitle" ? styles.subtitle : undefined,
+        type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
         type === "link" ? styles.link : undefined,
         style,
       ]}

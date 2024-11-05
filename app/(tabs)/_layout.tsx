@@ -4,7 +4,7 @@ import { Icon } from "@/components/ui/Icon"
 import { Colors } from "@/constants/Colors"
 import { useColorScheme } from "@/hooks/useColorScheme"
 
-export default function TabLayout() {
+const TabLayout = () => {
   const colorScheme = useColorScheme()
 
   return (
@@ -29,3 +29,4 @@ export default function TabLayout() {
     </Tabs>
   )
 }
+export default TabLayout

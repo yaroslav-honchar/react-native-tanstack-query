@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router"
 import React from "react"
 import { Image } from "react-native"
 import { ThemedText } from "@/components/ThemedText/ThemedText"
@@ -7,11 +8,15 @@ import type { CardMovieProps } from "./CardMovie.props"
 import { cardMovieStyles as styles } from "./CardMovie.styles"
 
 export const CardMovie: React.FC<CardMovieProps> = ({ movie }) => {
+  const router = useRouter()
   const { title, poster_path, release_date } = movie
   const releaseYear = new Date(release_date).getFullYear()
 
   return (
-    <ThemedView style={styles.root}>
+    <ThemedView
+      style={styles.root}
+      onTouchEnd={() => router.push("/movie")}
+    >
       <Image
         source={{
           uri: genImageUrlPoster(poster_path),
@@ -22,7 +27,9 @@ export const CardMovie: React.FC<CardMovieProps> = ({ movie }) => {
       <ThemedView style={styles.wrapper}>
         <ThemedText
           style={styles.title}
-          type={"subtitle"}
+          type={"defaultSemiBold"}
+          numberOfLines={1}
+          ellipsizeMode="tail"
         >
           {title}
         </ThemedText>
