@@ -1,5 +1,5 @@
 import axios, { type AxiosRequestConfig } from "axios"
-import type { IMovie } from "@/types/movie.type"
+import type { IMovieDetail, IMovieShort } from "@/types/movie.type"
 import type { IResults } from "@/types/results.type"
 import Constants from "expo-constants/src/Constants"
 
@@ -14,18 +14,25 @@ export const moviedbCore = axios.create({
     "Content-type": "application/json",
     Authorization: `Bearer ${token}`,
   },
+  params: {
+    language: "uk",
+  },
 })
 
 export const fetchMoviesList = (
   list: "now_playing" | "popular" | "top_rated" | "upcoming",
   configs?: AxiosRequestConfig,
 ) => {
-  return moviedbCore.get<IResults<IMovie>>(`/movie/${list}`, configs)
+  return moviedbCore.get<IResults<IMovieShort>>(`/movie/${list}`, configs)
 }
 
 export const fetchTrendings = (
   timeWindow: "week" | "day" = "day",
   configs?: AxiosRequestConfig,
 ) => {
-  return moviedbCore.get<IResults<IMovie>>(`/trending/movie/${timeWindow}`, configs)
+  return moviedbCore.get<IResults<IMovieShort>>(`/trending/movie/${timeWindow}`, configs)
+}
+
+export const fetchMovie = (id: string, configs?: AxiosRequestConfig) => {
+  return moviedbCore.get<IMovieDetail>(`/movie/${id}`, configs)
 }

@@ -1,6 +1,6 @@
 import { router } from "expo-router"
 import React from "react"
-import { Image } from "react-native"
+import { Image, Pressable } from "react-native"
 import { ThemedText } from "@/components/ThemedText/ThemedText"
 import { ThemedView } from "@/components/ThemedView"
 import { genImageUrlPoster } from "@/utils/build-image-url"
@@ -12,9 +12,9 @@ export const CardMovie: React.FC<CardMovieProps> = ({ movie }) => {
   const releaseYear = new Date(release_date).getFullYear()
 
   return (
-    <ThemedView
+    <Pressable
       style={styles.root}
-      onTouchEnd={() =>
+      onPress={() =>
         router.push({
           pathname: "/movies/[id]",
           params: {
@@ -46,6 +46,6 @@ export const CardMovie: React.FC<CardMovieProps> = ({ movie }) => {
           {releaseYear}
         </ThemedText>
       </ThemedView>
-    </ThemedView>
+    </Pressable>
   )
 }

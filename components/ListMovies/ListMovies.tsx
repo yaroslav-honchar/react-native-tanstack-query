@@ -1,14 +1,12 @@
 import React from "react"
-import { FlatList, Image } from "react-native"
+import { FlatList, View } from "react-native"
 import { fetchMoviesList } from "@/api/movies.api"
-import { Loader } from "@/components/Loader"
-import { ThemedText } from "@/components/ThemedText/ThemedText"
-import { genImageUrlPoster } from "@/utils/build-image-url"
+import { CardMovie } from "@/components/CardMovie"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import type { ListMoviesProps } from "./ListMovies.props"
 
 export const ListMovies: React.FC<ListMoviesProps> = () => {
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } = useInfiniteQuery({
+  const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
     queryKey: ["popular_movies"],
     queryFn: ({ pageParam }) => fetchMoviesList("popular", { params: { page: pageParam } }),
     initialPageParam: 1,
@@ -18,8 +16,6 @@ export const ListMovies: React.FC<ListMoviesProps> = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
-      {isError && <ThemedText>Error fetching images</ThemedText>}
       {data && (
         <FlatList
           numColumns={2}
@@ -30,12 +26,9 @@ export const ListMovies: React.FC<ListMoviesProps> = () => {
             }
           }}
           renderItem={({ item }) => (
-            <Image
-              source={{
-                uri: genImageUrlPoster(item.poster_path),
-              }}
-              style={{ width: "50%", height: 200 }}
-            />
+            <View style={{ width: "50%", padding: 8 }}>
+              <CardMovie movie={item} />
+            </View>
           )}
         />
       )}
